@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎁 For Kai <3 🎁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffd6e8, #fff4f9);
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      user-select: none;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .frame-container {
+      display: flex;
+      gap: 30px;
+      padding: 25px 40px;
+      border: 10px solid #ffb6c1;
+      border-radius: 35px;
+      background: #fff0f5;
+      box-shadow: 0 0 40px #ffabc1aa, inset 0 0 60px #ffc4d3cc;
+      width: 95vw;
+      max-width: 1300px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+
+    .decorative-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 280px;
+    }
+
+    .instruction-text {
+      margin-bottom: 20px;
+      background: #fff0f7;
+      border: 3px double #ffabc1;
+      border-radius: 18px;
+      padding: 10px 20px;
+      color: #cc5288;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 0 15px #ff9ac2aa;
+      text-shadow: 0 0 2px #fff;
+      max-width: 240px;
+      text-align: center;
+    }
+
+    .decorative-box {
+      width: 280px;
+      height: 280px;
+      perspective: 1000px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .decorative-box-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      border: 5px solid #ffb6c1;
+      border-radius: 25px;
+      box-shadow: 0 0 30px #ffacc1, inset 0 0 20px #ffd0de;
+      background: #ffe6f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .decorative-box.flipped .decorative-box-inner {
+      transform: rotateY(180deg);
+    }
+
+    .decorative-box-front,
+    .decorative-box-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .decorative-box-back {
+      transform: rotateY(180deg);
+    }
+
+    .decorative-box-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 25px;
+    }
+
+    .decorative-text {
+      font-size: 14px;
+      color: #b33a62;
+      text-align: center;
+      background: #fff7fa;
+      padding: 10px 15px;
+      border-radius: 15px;
+      border: 2px dashed #ffc2d5;
+      box-shadow: 0 0 10px #ffd6e3aa;
+      line-height: 2.4;
+      height: 370px;
+    }
+
+    .window {
+      flex-grow: 1;
+      background: #fff0f5;
+      border: 5px solid #ffb6c1;
+      border-radius: 25px;
+      box-shadow: 0 0 30px #ffacc1, inset 0 0 20px #ffd0de;
+      padding: 30px 35px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .window-header {
+      background: linear-gradient(90deg, #ffd0df, #fff0f8);
+      border-bottom: 3px dashed #ffa1bb;
+      border-radius: 20px 20px 0 0;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      box-shadow: inset 0 3px 6px #ffabc0cc;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .hearts span, .icons span {
+      width: 20px;
+      height: 20px;
+      margin: 0 4px;
+      display: inline-block;
+    }
+
+    .hearts span {
+      background: #ff73a5;
+      clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 75%, 15% 100%, 0% 35%);
+      box-shadow: 0 0 6px #ff4a7a;
+    }
+
+    .icons span {
+      background: #ffa7bb;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #ff7b9d;
+    }
+
+    /* Wrap sudoku and sidebar side by side */
+    .main-content {
+      display: flex;
+      gap: 25px;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    /* 🧩 Sudoku Container */
+    .sudoku-container {
+      width: 75%; /* increased width */
+      max-width: 800px;
+      padding: 30px;
+      background: #fff8fc;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #ffcee2;
+      box-sizing: border-box;
+      max-height: none;
+      overflow-y: visible;
+    }
+
+    /* 🧩 Sudoku Grid */
+    .sudoku-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .sudoku-cell {
+      width: 80%;
+      aspect-ratio: 1;
+      font-size: 31px;
+      text-align: center;
+      border: 2px solid #ffa1c3;
+      border-radius: 8px;
+      background: #fff6fb;
+      box-shadow: inset 0 0 8px #ffcde2;
+      color: #c03969;
+    }
+
+    .sudoku-cell:focus {
+      outline: none;
+      background: #ffe2f0;
+      box-shadow: 0 0 8px #ff8fb5;
+    }
+
+    /* Right Sidebar style */
+    .right-sidebar {
+      width: 18%;
+      background: #ffe6f0;
+      border: 3px dashed #ffb6c1;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #ffacc1aa inset;
+      padding: 25px 20px;
+      font-family: 'Pacifico', cursive;
+      color: #c04a73;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.5;
+      user-select: text;
+    }
+
+    .right-sidebar h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 26px;
+      color: #d9487f;
+      text-shadow: 0 0 6px #ffabc1aa;
+    }
+
+    .floating-hearts {
+      margin-top: 20px;
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .floating-hearts span {
+      animation: floatUp 4s ease-in-out infinite;
+      display: inline-block;
+      user-select: none;
+    }
+
+    /* Stagger animation delays */
+    .floating-hearts span:nth-child(1) { animation-delay: 0s; }
+    .floating-hearts span:nth-child(2) { animation-delay: 1.3s; }
+    .floating-hearts span:nth-child(3) { animation-delay: 2.6s; }
+
+    @keyframes floatUp {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-20px) scale(1.1);
+        opacity: 0.8;
+      }
+    }
+
+    #checkBtn {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #ffc9da;
+      border: 2px solid #ff88b0;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff9abe;
+      color: #a84168;
+      font-weight: bold;
+      cursor: not-allowed;
+      user-select: none;
+      margin-top: -73px;
+      transition: transform 0.2s, opacity 0.3s;
+      opacity: 0.5; /* Low opacity when disabled */
+    }
+
+    #checkBtn.enabled {
+      cursor: pointer;
+      background: #ff7ca9;
+      border-color: #ff5284;
+      box-shadow: 0 0 15px #ff6b95;
+      color: white;
+      opacity: 1; /* Full opacity when enabled */
+    }
+
+    #checkBtn.enabled:hover {
+      background: #ff5b81;
+      transform: scale(1.05);
+    }
+
+ #musicTip {
+  margin-left:80px;
+  margin-top:-135px;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  color: #cc5288;
+  font-size: 16px;
+  user-select: none;
+  max-width: 90vw;
+  width: fit-content;
+  padding: 8px 20px;
+  border: 2px dashed #ffabc1;
+  border-radius: 20px;
+  box-shadow: 0 0 15px #ff9ac2aa;
+  background: #fff0f7;
+  cursor: default;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 9;
+}
+
+#musicTip:hover {
+  color: #ff73a5;
+  box-shadow: 0 0 25px #ff73a5cc;
+}
+
+/* Make responsive adjustments */
+@media (max-width: 1100px) {
+  #musicTip {
+    margin-right: 0;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  #musicTip {
+    font-size: 14px;
+    padding: 6px 16px;
+    margin: 20px auto 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  #musicTip {
+    font-size: 13px;
+    padding: 5px 12px;
+    margin: 15px auto 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<div class="frame-container">
+  <div class="decorative-section">
+    <div class="instruction-text">Yup You Guessed It, Sudoku :)</div>
+    <div class="decorative-box" onclick="this.classList.toggle('flipped')">
+      <div class="decorative-box-inner">
+        <div class="decorative-box-front">Click Me!</div>
+        <div class="decorative-box-back">
+          <img src="https://gifdb.com/images/high/kawaii-cheering-cat-8ifhq4gm28yo2zjx.gif" alt="Cheering Cat" />
+        </div>
+      </div>
+    </div>
+    <p class="decorative-text">
+      Congrats! You made it this far. But I have a question for you. How many puzzles do you think exist? By now you're probably thinking... "But Carl I
+      thought this was supposed to be a birthday message and not a puzzle I should be solving??". Hahaha relax, I'm trying to make it a bit more fun :3
+      You know I like it more when you suffer for a bit, it's just my style you know? I hope you're enjoying :)
+    </p>
+  </div>
+
+  <div class="window">
+    <div class="window-header">
+      <div class="hearts"><span></span><span></span><span></span></div>
+      <div class="icons"><span></span><span></span><span></span></div>
+    </div>
+
+    <!-- New wrapper flex container to hold sudoku and sidebar side-by-side -->
+    <div class="main-content">
+      <div class="sudoku-container">
+        <div class="sudoku-grid" id="sudokuGrid"></div>
+      </div>
+
+      <div class="right-sidebar">
+        <h3>You Make Life Worth Living.</h3>
+        <p>
+          May you have the best birthday ever!<br>
+          I hope you're enjoying your trip in Indo with your family:) Have fun Kai, you deserve it all. Everything!
+        </p>
+        <div class="floating-hearts">
+          <span>💗</span>
+          <span>💖</span>
+          <span>💕</span>
+        </div>
+      </div>
+    </div>
+
+    <button id="checkBtn" disabled>You Did It! XD -Carl</button>
+  </div>
+</div>
+
+<!-- NEW TIP TEXT BELOW -->
+<div id="musicTip">Tip: Click Anywhere For Music, Also This Might Be The Last Game :></div>
+
+<script>
+  const puzzle = [
+    [5, 3, '', '', 7, '', '', '', ''],
+    [6, '', '', 1, 9, 5, '', '', ''],
+    ['', 9, 8, '', '', '', '', 6, ''],
+    [8, '', '', '', 6, '', '', '', 3],
+    [4, '', '', 8, '', 3, '', '', 1],
+    [7, '', '', '', 2, '', '', '', 6],
+    ['', 6, '', '', '', '', 2, 8, ''],
+    ['', '', '', 4, 1, 9, '', '', 5],
+    ['', '', '', '', 8, '', '', 7, 9]
+  ];
+
+  const grid = document.getElementById('sudokuGrid');
+  const checkBtn = document.getElementById('checkBtn');
+
+  // Create the sudoku inputs
+  puzzle.forEach(row => {
+    row.forEach(val => {
+      const input = document.createElement('input');
+      input.className = 'sudoku-cell';
+      input.type = 'text';
+      input.maxLength = 1;
+      input.autocomplete = "off";
+      input.spellcheck = false;
+      input.setAttribute('inputmode', 'numeric');
+      if (val !== '') {
+        input.value = val;
+        input.disabled = true;
+        input.style.background = '#ffdbe8';
+      }
+      grid.appendChild(input);
+    });
+  });
+
+  // Validate sudoku solution
+  function isValidSudoku() {
+    const inputs = Array.from(grid.querySelectorAll('input.sudoku-cell'));
+    let board = [];
+    for (let i = 0; i < 9; i++) {
+      board.push(inputs.slice(i*9, i*9 + 9).map(input => input.value.trim()));
+    }
+
+    // Check rows
+    for (let row = 0; row < 9; row++) {
+      let seen = new Set();
+      for (let col = 0; col < 9; col++) {
+        const val = board[row][col];
+        if (val === '' || !/^[1-9]$/.test(val)) return false;
+        if (seen.has(val)) return false;
+        seen.add(val);
+      }
+    }
+
+    // Check columns
+    for (let col = 0; col < 9; col++) {
+      let seen = new Set();
+      for (let row = 0; row < 9; row++) {
+        const val = board[row][col];
+        if (seen.has(val)) return false;
+        seen.add(val);
+      }
+    }
+
+    // Check 3x3 sub-boxes
+    for (let boxRow = 0; boxRow < 3; boxRow++) {
+      for (let boxCol = 0; boxCol < 3; boxCol++) {
+        let seen = new Set();
+        for (let row = boxRow * 3; row < boxRow * 3 + 3; row++) {
+          for (let col = boxCol * 3; col < boxCol * 3 + 3; col++) {
+            const val = board[row][col];
+            if (seen.has(val)) return false;
+            seen.add(val);
+          }
+        }
+      }
+    }
+
+    return true;
+  }
+
+  // Update button enabled state on input
+  function updateButtonState() {
+    if (isValidSudoku()) {
+      checkBtn.disabled = false;
+      checkBtn.classList.add('enabled');
+    } else {
+      checkBtn.disabled = true;
+      checkBtn.classList.remove('enabled');
+    }
+  }
+
+  // Add input listeners to all non-disabled inputs
+  const inputs = Array.from(grid.querySelectorAll('input.sudoku-cell:not(:disabled)'));
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      // Allow only digits 1-9
+      if (!/^[1-9]$/.test(input.value)) {
+        input.value = '';
+      }
+      updateButtonState();
+    });
+  });
+
+  // Redirect on button click
+  checkBtn.addEventListener('click', () => {
+    if (!checkBtn.disabled) {
+      // Change this URL to your next page
+      window.location.href = "letter.html";
+    }
+  });
+</script>
+<audio id="bgMusic" src="iris.mp3" preload="auto"></audio>
+<script>
+  let musicStarted = false;
+
+  function startMusic() {
+    if (!musicStarted) {
+      const music = document.getElementById('bgMusic');
+      music.play().catch(e => {
+        console.log("Autoplay failed:", e);
+      });
+      musicStarted = true;
+    }
+  }
+
+  document.addEventListener('click', startMusic);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎀 For Kai <3 🎀</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffd6e8 0%, #ffeaf1 50%, #fff4f9 100%);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      user-select: none;
+      color: #b33a62;
+      overflow: hidden;
+    }
+
+    .frame-container {
+      display: flex;
+      gap: 30px;
+      padding: 25px 40px;
+      border: 10px solid #ffb6c1;
+      border-radius: 35px;
+      background: #fff0f5;
+      box-shadow: 0 0 40px #ffabc1aa, inset 0 0 60px #ffc4d3cc;
+      max-width: 1200px;
+      width: 95vw;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .decorative-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 280px;
+    }
+
+    .decorative-box {
+      width: 280px;
+      height: 280px;
+      perspective: 1000px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .decorative-box.right {
+      position: relative;
+      top: var(--right-box-top, 395px);
+    }
+
+    .decorative-box-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      border: 5px solid #ffb6c1;
+      border-radius: 25px;
+      box-shadow: 0 0 30px #ffacc1, inset 0 0 20px #ffd0de;
+      background: #ffe6f0;
+      color: #c74981;
+      font-weight: 600;
+      font-size: 20px;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .decorative-box.flipped .decorative-box-inner {
+      transform: rotateY(180deg);
+    }
+
+    .decorative-box-front,
+    .decorative-box-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .decorative-box-back {
+      transform: rotateY(180deg);
+    }
+
+    .decorative-box-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 25px;
+      pointer-events: none;
+    }
+
+    .decorative-text {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #b33a62;
+      text-align: center;
+      background: #fff7fa;
+      padding: 10px 15px;
+      border-radius: 15px;
+      border: 2px dashed #ffc2d5;
+      box-shadow: 0 0 10px #ffd6e3aa;
+      font-family: 'Comic Sans MS', cursive;
+      line-height: 1.4;
+    }
+
+    .window {
+      background: #fff0f5;
+      border: 5px solid #ffb6c1;
+      border-radius: 25px;
+      box-shadow: 0 0 30px #ffacc1, inset 0 0 20px #ffd0de;
+      width: 500px;
+      padding: 30px 35px 50px;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .window:hover {
+      transform: scale(1.05);
+    }
+
+    .window-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, #ffd0df, #fff0f8);
+      border-bottom: 3px dashed #ffa1bb;
+      border-radius: 20px 20px 0 0;
+      padding: 14px 20px;
+      margin-bottom: 25px;
+      box-shadow: inset 0 3px 6px #ffabc0cc;
+      width: 100%;
+    }
+
+    .window-header .hearts span {
+      width: 20px;
+      height: 20px;
+      background: #ff73a5;
+      clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 75%, 15% 100%, 0% 35%);
+      margin-right: 8px;
+      box-shadow: 0 0 6px #ff4a7a;
+      display: inline-block;
+    }
+
+    .window-header .icons span {
+      width: 20px;
+      height: 20px;
+      background: #ffa7bb;
+      border-radius: 50%;
+      margin-left: 8px;
+      box-shadow: 0 0 6px #ff7b9d;
+      display: inline-block;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.6rem;
+      margin: 0 0 15px 0;
+      color: #d43e75;
+      text-shadow: 1px 1px 0 #ffb2cd, 0 0 10px #ff88a8;
+    }
+
+    #memoryGame {
+      display: grid;
+      grid-template-columns: repeat(4, 75px);
+      grid-template-rows: repeat(4, 75px);
+      gap: 14px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    #memoryGame button {
+      background: #ffe6f0;
+      border: 3px solid #ffaac3;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 0 10px #ffb6cc;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #memoryGame button img {
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    #memoryGame button:hover:enabled {
+      transform: scale(1.15);
+      box-shadow: 0 0 18px #ff7a9f;
+    }
+
+    #memoryGame button:disabled {
+      background: #ffc9d6;
+      cursor: default;
+      box-shadow: inset 0 0 12px #ff84a4;
+      color: #a53a58;
+    }
+
+    /* Styled question mark for hidden cards */
+    #memoryGame button .card-back {
+      font-size: 48px;
+      font-weight: bold;
+      color: #d46a88;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 70px;
+      height: 70px;
+      user-select: none;
+      border-radius: 14px;
+      background: #ffe6f0;
+      box-shadow: inset 0 0 8px #ffaacc;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    #memoryGame button:hover:not(:disabled) .card-back {
+      color: #ff4d7a;
+      text-shadow: 0 0 10px #ff79a3;
+    }
+
+    #doneBtn {
+      margin-top: 25px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #ffc9da;
+      color: #a84168;
+      border: 2px solid #ff88b0;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff9abe;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    #doneBtn.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    #doneBtn.enabled:hover {
+      background-color: #ffe0ed;
+      transform: scale(1.1);
+    }
+
+    .instruction-text {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff0f7;
+      border: 3px double #ffabc1;
+      border-radius: 18px;
+      padding: 10px 20px;
+      color: #cc5288;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 0 15px #ff9ac2aa;
+      z-index: 10;
+      text-shadow: 0 0 2px #fff;
+      max-width: 90vw;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="instruction-text">Match The Images Kai :)</div>
+
+  <div class="frame-container">
+
+    <!-- Left Box -->
+    <div class="decorative-section">
+      <div class="decorative-box" onclick="this.classList.toggle('flipped')">
+        <div class="decorative-box-inner">
+          <div class="decorative-box-front"> Click Me </div>
+          <div class="decorative-box-back">
+            <img src="img5.jpeg" alt="Cute Flower Decoration" />
+          </div>
+        </div>
+      </div>
+      <p class="decorative-text" style="margin-top: 15px; height: 350px; line-height: 2;">
+        Heya, Kaikai<br>
+        I know how much you liked puzzles<br>
+        So I tried to learn how to build<br>
+        And implement them on these pages<br>
+        But browsers have limitations<br>
+        And this is the best I could do.<br>
+        I'm really sorry for making you<br>
+        Think I was just playing mc, those<br>
+        Were actually old screenshots taken.<br>
+        I wanted to make you think I was not<br>
+        Doing something for your birthday<br>
+        When I was already making this xD
+      </p>
+    </div>
+
+    <!-- Memory Game Window -->
+    <div class="window">
+      <div class="window-header">
+        <div class="hearts"><span></span><span></span><span></span></div>
+        <div class="icons"><span></span><span></span><span></span></div>
+      </div>
+      <h1>🎀 Uh.. Again? 🎀</h1>
+      <div id="memoryGame"></div>
+      <button id="doneBtn" disabled>I Did It Again Carl! 💕</button>
+    </div>
+
+    <!-- Right Box -->
+    <div class="decorative-section" style="--right-box-top: 395px;">
+      <div class="decorative-box right" onclick="this.classList.toggle('flipped')">
+        <div class="decorative-box-inner">
+          <div class="decorative-box-front"> Click Me </div>
+          <div class="decorative-box-back">
+            <img src="img3.jpeg" alt="Sweet Cake Decoration" />
+          </div>
+        </div>
+      </div>
+      <p class="decorative-text" style="margin-top: -280px; height: 350px; line-height: 2;">
+        Well.. for a week now but this is the<br>
+        Most fun I ever had with coding. You<br>
+        Know, I was really enjoying thinking<br>
+        About all the mischievous features I<br>
+        Could add on here and to make you uh<br>
+        Suffer for a bit? XD but don't worry<br>
+        I'll show you something after all this.<br>
+        I didn't want to give you an ordinary<br>
+        Birthday letter because to me that<br>
+        Would look lifeless and effortless.<br>
+        I hope I can put a big smile on that<br>
+        Pretty face of yours, enjoy! <3
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Added audio element -->
+  <audio id="bgMusic" loop src="audio.mp3"></audio>
+
+  <script>
+    // Replace this array with your actual 8 unique image filenames in the root folder
+    const imageFiles = ['img1.jpeg', 'img2.jpeg', 'img4.jpeg', 'img6.jpeg', 'img7.jpeg', 'img8.jpeg', 'img10.jpeg', 'img11.jpeg'];
+
+    const cards = [...imageFiles, ...imageFiles].sort(() => Math.random() - 0.5);
+    const memoryGame = document.getElementById('memoryGame');
+    const doneBtn = document.getElementById('doneBtn');
+
+    let firstCard = null, secondCard = null;
+    let matchedPairs = 0;
+    let lockBoard = false;
+
+    cards.forEach(imageFile => {
+      const card = document.createElement('button');
+      card.dataset.image = imageFile;
+
+      // Use styled question mark div instead of image for card back
+      const cardBack = document.createElement('div');
+      cardBack.classList.add('card-back');
+      cardBack.textContent = '?';
+      card.appendChild(cardBack);
+
+      card.addEventListener('click', () => {
+        if (lockBoard || card === firstCard || card.classList.contains('matched')) return;
+
+        // Show the actual image
+        card.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = card.dataset.image;
+        img.alt = 'Memory card';
+        card.appendChild(img);
+
+        if (!firstCard) {
+          firstCard = card;
+        } else {
+          secondCard = card;
+
+          if (firstCard.dataset.image === secondCard.dataset.image) {
+            matchedPairs++;
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+            firstCard = null;
+            secondCard = null;
+
+            if (matchedPairs === imageFiles.length) {
+              doneBtn.disabled = false;
+              doneBtn.classList.add('enabled');
+            }
+          } else {
+            lockBoard = true;
+            setTimeout(() => {
+              [firstCard, secondCard].forEach(c => {
+                c.innerHTML = '';
+                const cardBack = document.createElement('div');
+                cardBack.classList.add('card-back');
+                cardBack.textContent = '?';
+                c.appendChild(cardBack);
+              });
+              firstCard = null;
+              secondCard = null;
+              lockBoard = false;
+            }, 1000);
+          }
+        }
+      });
+
+      memoryGame.appendChild(card);
+    });
+
+    doneBtn.addEventListener('click', () => {
+      if (!doneBtn.disabled) {
+        window.location.href = "crossword.html";
+      }
+    });
+
+    // Music play on first click anywhere
+    const bgMusic = document.getElementById('bgMusic');
+    let musicStarted = false;
+    document.body.addEventListener('click', () => {
+      if (!musicStarted) {
+        bgMusic.play().catch(() => {
+          // Autoplay might be blocked until user interaction
+        });
+        musicStarted = true;
+      }
+    }, { once: true });
+  </script>
+
+</body>
+</html>

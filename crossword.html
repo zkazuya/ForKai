@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title> For Kai <3 </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff0f5 url('https://static.vecteezy.com/system/resources/previews/010/839/386/original/aesthetic-minimal-cute-pastel-pink-wallpaper-illustration-perfect-for-wallpaper-backdrop-postcard-background-banner-vector.jpg');
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff69b4;
+      text-shadow: 1px 1px white;
+      margin: 20px 0 10px;
+      font-size: 3rem;
+    }
+
+    .game-wrapper {
+      background: #ffe4f0;
+      border: 3px solid #ffb6c1;
+      border-radius: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 30px;
+      display: flex;
+      gap: 40px;
+      width: 90vw;
+      max-width: 1200px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(7, 60px);
+      grid-template-rows: repeat(7, 60px);
+      gap: 4px;
+      position: relative;
+    }
+
+    .cell {
+      width: 60px;
+      height: 60px;
+      background: #ffe4f0;
+      border: 1px solid #ff99cc;
+      border-radius: 8px;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .cell input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      font-size: 28px;
+      color: #d63384;
+      text-transform: uppercase;
+      outline: none;
+      cursor: text;
+    }
+
+    .cell input:focus {
+      background: #ffd6e8;
+      border-radius: 5px;
+      outline: 2px solid #ff69b4;
+    }
+
+    .cell .label {
+      position: absolute;
+      top: 4px;
+      left: 6px;
+      font-size: 14px;
+      color: #888;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .correct {
+      background: #c8e6c9 !important;
+    }
+
+    .wrong {
+      background: #ffcdd2 !important;
+    }
+
+    .hints {
+      background: #ffe6f2;
+      padding: 25px;
+      border-radius: 20px;
+      width: 300px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      font-size: 16px;
+      color: #cc0066;
+    }
+
+    .hints h2 {
+      margin-top: 0;
+      color: #ff4da6;
+      font-size: 1.5rem;
+    }
+
+    .hints ul {
+      padding-left: 20px;
+    }
+
+    .hints li {
+      margin-bottom: 10px;
+    }
+
+    .note-display {
+      margin-top: 30px;
+      padding: 20px;
+      max-width: 700px;
+      background: #fff0fa;
+      border: 2px dashed #ffb6c1;
+      border-radius: 20px;
+      text-align: center;
+      color: #d63384;
+      font-size: 18px;
+      line-height: 1.8;
+      user-select: none;
+    }
+
+    .button {
+      margin-top: 25px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 20px;
+      font-family: 'Comic Sans MS', cursive;
+      font-size: 20px;
+      cursor: not-allowed;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+      transition: background 0.3s;
+      opacity: 0.6;
+      user-select: none;
+    }
+
+    .button.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .button:hover.enabled {
+      background: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <h1>ALMOST THERE?</h1>
+  <div class="game-wrapper">
+    <div>
+      <div class="grid" id="puzzleGrid"></div>
+      <div class="note-display">
+        I lost my mind making this one xD, it was<br>
+        just not possible to make crossword bruh
+      </div>
+      <button class="button" id="nextBtn" disabled>That Was Too Easy Carl! Got Anything Else?</button>
+    </div>
+    <div class="hints">
+      <h2>🔍 Hints! Or Perhaps...</h2>
+      <ul>
+        <li><b>1:</b> The Month Of My Birthday</li>
+        <li><b>2:</b> You're Deprived Of This XD</li>
+        <li><b>3:</b> My Zodiac Sign (Easiest)</li>
+        <li><b>4:</b> This Is My Fav Number!</li>
+        <li><b>5:</b> One Thing You Hate Ig?</li>
+        <li><b>6:</b> What Is My Fav Color?</li>
+        <li><b>7:</b> Game We Play Together</li>
+        <p>
+          Hewwo princess! Not all of them will fill the entire row with letters, some only contains 3 letters and some 6 letters. Don't be afraid to guess letters
+          because it is designed for you to guess if you can't do it first try. Also, you are very close to the finishing line! :D (Uh if you believe this you're stoopid)
+          But dw 'cause everything is easy xD But I'm not so sure about the last one... I even struggle on it myself :3 (The puzzle after this) These are the final few hints.
+          I'll be waiting for you :D
+        </p>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const gridData = [
+      "AUGUST", "SLEEP", "LEO", "SEVEN", "MATH", "CERISE", "ROBLOX"
+    ];
+
+    const grid = document.getElementById("puzzleGrid");
+
+    for (let row = 0; row < 7; row++) {
+      const word = gridData[row];
+      for (let col = 0; col < 7; col++) {
+        const div = document.createElement("div");
+        div.className = "cell";
+        const input = document.createElement("input");
+        input.maxLength = 1;
+        const letter = word[col] || "";
+        input.dataset.answer = letter;
+        if (letter === "") {
+          input.disabled = true;
+        }
+        if (col === 0) {
+          const label = document.createElement("span");
+          label.className = "label";
+          label.innerText = row + 1;
+          div.appendChild(label);
+        }
+        div.appendChild(input);
+        grid.appendChild(div);
+      }
+    }
+
+    const inputs = document.querySelectorAll('.cell input');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function checkAllCorrect() {
+      for (let input of inputs) {
+        const expected = input.dataset.answer;
+        if (expected && input.value.toUpperCase() !== expected.toUpperCase()) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function updateButtonState() {
+      const allCorrect = checkAllCorrect();
+      if (allCorrect) {
+        nextBtn.disabled = false;
+        nextBtn.classList.add("enabled");
+        nextBtn.onclick = () => window.location.href = "sudoku.html";
+      } else {
+        nextBtn.disabled = true;
+        nextBtn.classList.remove("enabled");
+        nextBtn.onclick = null;
+      }
+    }
+
+    inputs.forEach(input => {
+      input.addEventListener('input', () => {
+        input.value = input.value.toUpperCase();
+        const answer = input.dataset.answer;
+        if (answer && input.value === answer.toUpperCase()) {
+          input.classList.add("correct");
+          input.classList.remove("wrong");
+        } else if (input.value !== "") {
+          input.classList.add("wrong");
+          input.classList.remove("correct");
+        } else {
+          input.classList.remove("correct", "wrong");
+        }
+        updateButtonState();
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', updateButtonState);
+
+    const bgMusic = new Audio('backburner.mp3');
+    bgMusic.loop = true;
+    let musicStarted = false;
+    window.addEventListener('click', () => {
+      if (!musicStarted) {
+        bgMusic.play().catch(() => {});
+        musicStarted = true;
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎉 For My Kai <3 🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: url('bday.png') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: pink;
+      border-radius: 50%;
+      animation: fall 5s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .click-zone {
+      position: absolute;
+      top: 59.4%;
+      left: 45.7%;
+      transform: translate(-50%, -50%);
+      width: 20.5vw;
+      height: 32vh;
+      min-width: 100px;
+      min-height: 60px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .tip {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      background-color: rgba(255, 240, 245, 0.8);
+      color: #d63384;
+      padding: 8px 15px;
+      border-radius: 10px;
+      font-size: 1.4em;
+      font-weight: bold;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      z-index: 30;
+    }
+
+    .letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #f9d3ec url('https://i.imgur.com/1Q8ZQ5M.png') center/cover no-repeat;
+  border: 2px solid #e3b4c2;
+  border-radius: 10px;
+  padding: 60px 30px 30px 30px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  font-size: 1.2em;
+  color: #d63384;
+  z-index: 20;
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.letter.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.letter::-webkit-scrollbar {
+  width: 8px;
+}
+
+.letter::-webkit-scrollbar-thumb {
+  background-color: #ffc0dd;
+  border-radius: 10px;
+}
+
+.letter::-webkit-scrollbar-track {
+  background-color: #ffe6f0;
+}
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background-color: #ffd6e8;
+      color: #d63384;
+      border: none;
+      padding: 6px 12px;
+      font-size: 1em;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s ease;
+    }
+
+    .close-btn:hover {
+      background-color: #ffc0dd;
+    }
+
+    .firework {
+      position: absolute;
+      border-radius: 50%;
+      width: 6px;
+      height: 6px;
+      background-color: #ff69b4;
+      animation: explode 800ms ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(6); }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(-45deg);
+      animation: float 6s linear infinite;
+      z-index: 5;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { top: 0; left: 10px; }
+
+    @keyframes float {
+      0% { bottom: -30px; opacity: 0; }
+      10% { opacity: 1; }
+      100% { bottom: 100vh; opacity: 0; transform: translateX(-20px) rotate(-45deg); }
+    }
+
+    .together-box {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 2px dashed #ff69b4;
+      padding: 12px 20px;
+      border-radius: 15px;
+      font-size: 1.1em;
+      color: #d63384;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      z-index: 25;
+      cursor: pointer;
+    }
+
+    .popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #fff0f6;
+      padding: 60px 30px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      font-size: 1.2em;
+      color: #d63384;
+      z-index: 30;
+      text-align: center;
+      max-width: 400px;
+      transition: transform 0.3s ease;
+    }
+
+    .popup.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .gift-box {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: url('https://i.imgur.com/dzjZkJ2.png') no-repeat center center / cover;
+      cursor: pointer;
+      z-index: 12;
+    }
+
+    .gift-popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #fff0f6;
+      padding: 50px 30px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 350px;
+      text-align: center;
+      z-index: 40;
+      color: #d63384;
+      transition: transform 0.3s ease;
+    }
+
+    .gift-popup.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .gift-popup .close-btn {
+      background-color: #ffd6e8;
+      color: #d63384;
+      border: none;
+      padding: 6px 12px;
+      font-size: 1em;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    }
+    .firework-launch {
+  position: absolute;
+  width: 4px;
+  height: 20px;
+  background: #ff69b4;
+  z-index: 50;
+  animation: rise 600ms ease-out forwards;
+}
+
+@keyframes rise {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-150px); opacity: 0; }
+}
+
+.firework-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #ff69b4;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 1;
+  z-index: 49;
+  animation: explode-particle 1000ms ease-out forwards;
+}
+
+@keyframes explode-particle {
+  to {
+    transform: translate(var(--dx), var(--dy)) scale(0.3);
+    opacity: 0;
+  }
+}
+.cd-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      transform: scale(2.2);
+      transform-origin: top right;
+      z-index: 50;
+    }
+
+    .cd-disk {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle at center, #ffe6f0 40%, #ffb6d1 80%);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1), inset 0 0 10px #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      animation: spinCD 6s linear infinite;
+    }
+
+    @keyframes spinCD {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .cd-hole {
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      border: 2px solid #d63384;
+      box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .cd-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.4em;
+      color: #d63384;
+      font-weight: bold;
+      font-family: 'Comic Sans MS', cursive;
+      pointer-events: none;
+    }
+
+    .cd-popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #fff0f6;
+      padding: 50px 30px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      z-index: 60;
+      color: #d63384;
+      transition: transform 0.3s ease;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    .cd-popup.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .cd-popup h3 {
+      margin-bottom: 15px;
+      font-size: 1.4em;
+    }
+
+    .cd-songs {
+      list-style: none;
+      padding: 0;
+      font-size: 1.1em;
+      line-height: 1.8;
+      margin-top: 10px;
+    }
+    .letter h2 {
+  margin-bottom: 30px; /* or 30px for more space */
+}
+  </style>
+</head>
+<body onclick="handleClick(event)">
+  <audio id="bg-music" src="mineallmine.mp3" loop></audio>
+  <div class="tip">Click Anywhere For Music 🎵</div>
+  <div class="click-zone" onclick="revealLetter(event)"></div>
+
+  <div class="letter" id="birthday-letter">
+    <button class="close-btn" onclick="closeLetter(event)">Close</button>
+    <h2>💌 To Kaikai 💌</h2>
+    <p>Hello Kaikaiii honestly andami kong gusto sabihin sayo and hindi ko alam where to start xD buttt ayoko istructure to ng maayos or make it look good kasi hindi ko gusto sabihin kung ano naiisip ko, I only want everything to come from the bottom of my heart<br><br>
+
+Una sa lahat thoughhh HAPPY 18TH BIRTHDAYYY!!! to the most pretty, most mature, most intelligent, most caring, most considerate, most creative, most independent, most humble, most talented, most calm, most patient, most principled, most gentle, most genuine, most influential, most artistic, most elegant, most thoughtful, most unique, most empathetic, my most delightful person ever:)<br><br>
+
+Kai, I pray that you win in life. I'll be there for you and i'll support you so loudly that you won't ever hear the noise of those who doubted you. Because you always have me, Kai. I remember dati when I told you about one of my dreams, you told me you wanted to see me on top. I want to see you on top too just as much as you want me to. I'm your biggest fan:) 
+
+I may not be a vocal person but I notice things. I notice how you're willing to stay up all night just to wait for me when I'm doing something pa so you could properly say goodnight. I notice how when I have errands for tomorrow you always ask me what time ako aalis just so you could wake up and see me off even if it's 4 am. I notice how you're willing to play a game with me or anything in general even if it's not something you truly enjoy, just to be with me. I notice how you're willing to drop everything you're doing, even when you're with your friends just so you could give your full attention to me. I notice these little things that you do for me and I really appreciate everything. <br><br>Thank you for bringing out the best version of you and for bringing the best version of myself as well
+
+Kaira. Thank you ah? for being part of this life, my life. Thank you for growing well, thank you for your making me laugh even with those silly jokes na sinasabi mo xD (please don't stop). Thank you for understanding me in any situation.  Thank you for all of your hard work:) Kai. <br><br> You make my life worth living. 🎀</p>
+  </div>
+
+  <div class="together-box" onclick="togglePopup(event)">💕 How Long We've Been Together</div>
+
+  <div class="popup" id="time-popup">
+    <button class="close-btn" onclick="togglePopup(event)">Close</button>
+    <h3>⏳ We've Been Together For:</h3>
+    <p id="time-counter"></p>
+  </div>
+
+  <!-- 🎁 Gift Boxes -->
+  <div class="gift-box" style="top: 30%; left: 20%;" onclick="showGift(event, '🎁 You found a secret surprise! 🤗 Here\'s a virtual hug! 💞')"></div>
+  <div class="gift-box" style="top: 70%; left: 75%;" onclick="showGift(event, '🎁 Yay! You discovered this one too! 💖 I love you so much! 💕')"></div>
+
+  <div class="gift-popup" id="gift-popup">
+    <button class="close-btn" onclick="closeGift(event)">Close</button>
+    <p id="gift-message"></p>
+  </div>
+<div class="cd-container">
+    <div class="cd-disk" onclick="showCDPopup(event)">
+      <div class="cd-hole"></div>
+      <div class="cd-label">🕾️
+      </div>
+    </div>
+  </div>
+
+  <div class="cd-popup" id="cd-popup">
+    <button class="close-btn" onclick="closeCDPopup(event)">Close</button>
+    <h3>Songs That Remind Me of You</h3>
+    <ul class="cd-songs">
+      <li>🎵 Mine All Mine – <em>your fav song</em></li>
+      <li>🎵 Wishful Thinking - <em>our fav song</em></li>
+      <li>🎵 Backburner - <em> remember this? XD</em></li>
+      <li>🎵 You'll Be In My Heart - <em>always</em></li>
+      <li>🎵 Him & I - <em>i recomm'd this to you </em></li>
+    </ul>
+  </div>
+  <script>
+    const colors = ['#ff69b4', '#ffb6c1', '#ffc0cb', '#ff1493', '#db7093'];
+
+    function createConfettiPiece() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.width = confetti.style.height = Math.random() * 8 + 4 + 'px';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 6000);
+    }
+
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+
+    setInterval(createConfettiPiece, 150);
+    setInterval(createFloatingHeart, 800);
+
+    function playMusic() {
+      const audio = document.getElementById('bg-music');
+      audio.play();
+    }
+
+    function handleClick(e) {
+      playMusic();
+      createFirework(e.clientX, e.clientY);
+    }
+
+    function createFirework(x, y) {
+      for (let i = 0; i < 12; i++) {
+        const firework = document.createElement('div');
+        firework.classList.add('firework');
+        firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        firework.style.left = `${x}px`;
+        firework.style.top = `${y}px`;
+        firework.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(firework);
+        setTimeout(() => firework.remove(), 800);
+      }
+    }
+
+    function revealLetter(e) {
+      e.stopPropagation();
+      document.getElementById('birthday-letter').classList.add('show');
+    }
+
+    function closeLetter(e) {
+      e.stopPropagation();
+      document.getElementById('birthday-letter').classList.remove('show');
+    }
+
+    function togglePopup(e) {
+      e.stopPropagation();
+      document.getElementById('time-popup').classList.toggle('show');
+    }
+
+    function showGift(e, message) {
+      e.stopPropagation();
+      document.getElementById('gift-message').innerText = message;
+      document.getElementById('gift-popup').classList.add('show');
+    }
+
+    function closeGift(e) {
+      e.stopPropagation();
+      document.getElementById('gift-popup').classList.remove('show');
+    }
+
+    function updateTimeTogether() {
+      const startDate = new Date("2025-03-01T00:00:00");
+      const now = new Date();
+
+      let months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+      let tempDate = new Date(startDate);
+      tempDate.setMonth(tempDate.getMonth() + months);
+
+      if (tempDate > now) {
+        months--;
+        tempDate.setMonth(tempDate.getMonth() - 1);
+      }
+
+      const diff = now - tempDate;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('time-counter').innerText =
+        `${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    }
+
+    setInterval(updateTimeTogether, 1000);
+    updateTimeTogether();
+    function autoFirework() {
+  const x = Math.random() * window.innerWidth;
+  const y = window.innerHeight * 0.8;
+
+  const rocket = document.createElement('div');
+  rocket.className = 'firework-launch';
+  rocket.style.left = `${x}px`;
+  rocket.style.top = `${y}px`;
+  document.body.appendChild(rocket);
+
+  setTimeout(() => {
+    rocket.remove();
+    createExplosion(x, y - 150);
+  }, 600);
+}
+
+function createExplosion(x, y) {
+  const numParticles = 24;
+  for (let i = 0; i < numParticles; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'firework-particle';
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = 60 + Math.random() * 40;
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
+
+    particle.style.setProperty('--dx', `${dx}px`);
+    particle.style.setProperty('--dy', `${dy}px`);
+    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    document.body.appendChild(particle);
+    setTimeout(() => particle.remove(), 1000);
+  }
+}
+
+// Faster auto-fireworks (every 400ms)
+setInterval(autoFirework, 400);
+function showCDPopup(e) {
+      e.stopPropagation();
+      document.getElementById('cd-popup').classList.add('show');
+    }
+    function closeCDPopup(e) {
+      e.stopPropagation();
+      document.getElementById('cd-popup').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

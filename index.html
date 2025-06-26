@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎀 For Kai <3 🎀</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: url('https://static.vecteezy.com/system/resources/previews/009/924/602/original/cute-pink-abstract-minimal-background-perfect-for-wallpaper-backdrop-postcard-background-vector.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      gap: 30px;
+    }
+
+    #musicTip {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 240, 245, 0.95);
+      color: #d63384;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 20px 25px;
+      border-radius: 15px;
+      border: 2px solid #ffb6c1;
+      box-shadow: 0 0 12px #ffc0cb;
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    .window {
+      background: #fff0f5;
+      border: 3px solid #ffb6c1;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ffc0cb;
+      padding: 20px;
+      width: 380px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .window-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, #ffcde1, #ffe6f0);
+      border-bottom: 2px dashed #ffb6c1;
+      padding: 10px;
+      border-radius: 12px 12px 0 0;
+      width: 100%;
+    }
+
+    .window-header .hearts {
+      display: flex;
+      gap: 5px;
+    }
+
+    .window-header .hearts span {
+      width: 15px;
+      height: 15px;
+      background: #ff6fa1;
+      clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 75%, 15% 100%, 0% 35%);
+    }
+
+    .window-header .icons {
+      display: flex;
+      gap: 5px;
+    }
+
+    .window-header .icons span {
+      width: 15px;
+      height: 15px;
+      background: #ffb6c1;
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-size: 18px;
+      margin: 20px 0 10px;
+      color: #d63384;
+    }
+
+    #puzzle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .piece {
+      width: 100px;
+      height: 100px;
+      background-size: 300px 300px;
+      border-radius: 10px;
+      border: 1px solid #ffd6e8;
+      box-shadow: 0 0 5px #fbb1d3;
+      cursor: grab;
+      position: absolute;
+      pointer-events: auto;
+    }
+
+    #dropzone {
+      width: 300px;
+      height: 300px;
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 0;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .slot {
+      width: 100px;
+      height: 100px;
+      border: 1px dashed #ffb6c1;
+      border-radius: 10px;
+    }
+
+    #redirectButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ffa6c9;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: not-allowed;
+      opacity: 0.6;
+      box-shadow: 0 0 10px #ffc0cb;
+      transition: all 0.3s ease;
+    }
+
+    #redirectButton.enabled {
+      cursor: pointer;
+      opacity: 1;
+      background-color: #ff6fa1;
+      box-shadow: 0 0 15px #ff9ecf;
+    }
+
+    .image-box {
+      width: 300px;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 15px;
+      border: 3px solid #ffb6c1;
+      margin-top: 20px;
+      box-shadow: 0 0 10px #ffc0cb;
+    }
+
+    .instruction-text {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 240, 245, 0.95);
+      border: 2px solid #ffb6c1;
+      border-radius: 12px;
+      padding: 10px 15px;
+      color: #d63384;
+      font-size: 16px;
+      box-shadow: 0 0 10px #ffc0cb;
+      max-width: 320px;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <div id="musicTip">🎵 Click Anywhere For Music</div>
+  <div class="instruction-text"> Drag The Pieces On The Center Grid Kai :)</div>
+  <div id="puzzle"></div>
+
+  <div class="window">
+    <div class="window-header">
+      <div class="hearts"><span></span><span></span><span></span></div>
+      <div class="icons"><span></span><span></span><span></span></div>
+    </div>
+    <h1>🎀 A Goddess? 🎀</h1>
+    <div class="image-box" style="background-image: url('leftpic.jpeg');"></div>
+  </div>
+
+  <div class="window">
+    <div class="window-header">
+      <div class="hearts"><span></span><span></span><span></span></div>
+      <div class="icons"><span></span><span></span><span></span></div>
+    </div>
+    <h1>🎀 Uhh... What Do We Have Here? 🎀</h1>
+    <div id="dropzone"></div>
+    <button id="redirectButton" disabled> I Did It Kazuya! 💕</button>
+  </div>
+
+  <div class="window">
+    <div class="window-header">
+      <div class="hearts"><span></span><span></span><span></span></div>
+      <div class="icons"><span></span><span></span><span></span></div>
+    </div>
+    <h1>🎀 Or Perhaps An Angel? 🎀</h1>
+    <div class="image-box" style="background-image: url('rightpic.jpeg');"></div>
+  </div>
+
+  <script>
+    const imageUrl = 'pic1.jpeg';
+    const puzzleSize = 3;
+    const puzzle = document.getElementById('puzzle');
+    const dropzone = document.getElementById('dropzone');
+    const redirectButton = document.getElementById('redirectButton');
+    const musicTip = document.getElementById('musicTip');
+    const placedRects = [];
+
+    function createPuzzle() {
+      const windowRects = Array.from(document.querySelectorAll('.window')).map(el => el.getBoundingClientRect());
+      const musicTipRect = musicTip.getBoundingClientRect();
+      const instructionRect = document.querySelector('.instruction-text').getBoundingClientRect(); // NEW
+
+      let index = 0;
+
+      for (let row = 0; row < puzzleSize; row++) {
+        for (let col = 0; col < puzzleSize; col++) {
+          const slot = document.createElement('div');
+          slot.classList.add('slot');
+          slot.dataset.index = index;
+          dropzone.appendChild(slot);
+
+          const piece = document.createElement('div');
+          piece.classList.add('piece');
+          piece.draggable = true;
+          piece.dataset.index = index;
+          piece.style.backgroundImage = `url('${imageUrl}')`;
+          piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+
+          let safe = false, attempts = 0;
+          while (!safe && attempts < 500) {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            const rect = { left: x, top: y, right: x + 100, bottom: y + 100 };
+
+            const overlapsWindow = windowRects.some(r => !(rect.right < r.left || rect.left > r.right || rect.bottom < r.top || rect.top > r.bottom));
+            const overlapsTip = !(rect.right < musicTipRect.left || rect.left > musicTipRect.right || rect.bottom < musicTipRect.top || rect.top > musicTipRect.bottom);
+            const overlapsInstruction = !(rect.right < instructionRect.left || rect.left > instructionRect.right || rect.bottom < instructionRect.top || rect.top > instructionRect.bottom); // NEW
+            const overlapsOthers = placedRects.some(r => !(rect.right < r.left || rect.left > r.right || rect.bottom < r.top || rect.top > r.bottom));
+
+            if (!overlapsWindow && !overlapsTip && !overlapsInstruction && !overlapsOthers) {
+              piece.style.left = `${x}px`;
+              piece.style.top = `${y}px`;
+              placedRects.push(rect);
+              safe = true;
+            }
+            attempts++;
+          }
+
+          puzzle.appendChild(piece);
+          index++;
+        }
+      }
+    }
+
+    let draggedPiece = null, originalParent = null;
+
+    document.addEventListener('dragstart', e => {
+      if (e.target.classList.contains('piece')) {
+        draggedPiece = e.target;
+        originalParent = draggedPiece.parentNode;
+      }
+    });
+
+    document.addEventListener('dragover', e => e.preventDefault());
+
+    document.addEventListener('drop', e => {
+      if (e.target.classList.contains('piece')) {
+        const targetPiece = e.target;
+        const targetParent = targetPiece.parentNode;
+
+        if (originalParent && targetParent) {
+          originalParent.appendChild(targetPiece);
+          targetParent.appendChild(draggedPiece);
+          draggedPiece.style.position = 'static';
+          targetPiece.style.position = 'static';
+          checkCompletion();
+        }
+      } else if (e.target.classList.contains('slot')) {
+        if (e.target.children.length === 0 && draggedPiece) {
+          e.target.appendChild(draggedPiece);
+          draggedPiece.style.position = 'static';
+          checkCompletion();
+        }
+      }
+    });
+
+    function checkCompletion() {
+      const slots = Array.from(dropzone.children);
+      const isCorrect = slots.every(slot => slot.children.length && slot.children[0].dataset.index === slot.dataset.index);
+
+      if (isCorrect) {
+        redirectButton.disabled = false;
+        redirectButton.classList.add('enabled');
+      }
+    }
+
+    redirectButton.addEventListener('click', () => {
+      if (!redirectButton.disabled) {
+        window.location.href = 'memory.html';
+      }
+    });
+
+    window.onload = createPuzzle;
+  </script>
+
+  <audio id="bgMusic" src="bgm1.mp3" preload="auto"></audio>
+  <script>
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0.5;
+    function playMusicOnce() {
+      bgMusic.play().catch(() => {});
+      document.removeEventListener('click', playMusicOnce);
+    }
+    document.addEventListener('click', playMusicOnce);
+  </script>
+</body>
+</html>
