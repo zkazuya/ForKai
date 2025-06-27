@@ -72,7 +72,7 @@
   max-width: 500px;
   max-height: 80vh;
   overflow-y: auto;
-  background: #f9d3ec url('https://i.imgur.com/1Q8ZQ5M.png') center/cover no-repeat;
+  background: #f9d3ec;
   border: 2px solid #e3b4c2;
   border-radius: 10px;
   padding: 60px 30px 30px 30px;
@@ -198,48 +198,6 @@
 
     .popup.show {
       transform: translate(-50%, -50%) scale(1);
-    }
-
-    .gift-box {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background: url('https://i.imgur.com/dzjZkJ2.png') no-repeat center center / cover;
-      cursor: pointer;
-      z-index: 12;
-    }
-
-    .gift-popup {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: #fff0f6;
-      padding: 50px 30px 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      max-width: 350px;
-      text-align: center;
-      z-index: 40;
-      color: #d63384;
-      transition: transform 0.3s ease;
-    }
-
-    .gift-popup.show {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .gift-popup .close-btn {
-      background-color: #ffd6e8;
-      color: #d63384;
-      border: none;
-      padding: 6px 12px;
-      font-size: 1em;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-bottom: 10px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     }
     .firework-launch {
   position: absolute;
@@ -389,10 +347,7 @@ Kaira. Thank you ah? for being part of this life, my life. Thank you for growing
     <p id="time-counter"></p>
   </div>
 
-  <div class="gift-popup" id="gift-popup">
-    <button class="close-btn" onclick="closeGift(event)">Close</button>
-    <p id="gift-message"></p>
-  </div>
+  
 <div class="cd-container">
     <div class="cd-disk" onclick="showCDPopup(event)">
       <div class="cd-hole"></div>
